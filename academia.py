@@ -17,6 +17,24 @@ def carregar_fichas():
     except FileNotFoundError:
         pass
 
+def deletar():
+    """Deleta uma ficha por nome."""
+    limpar('DELETAR FICHA')
+    busca = input('Nome do aluno para deletar: ').title()
+
+    for i, ficha in enumerate(FICHAS):
+        if busca == ficha['aluno']:
+            confirmacao = input(f'Tem certeza que deseja deletar a ficha de {ficha["aluno"]}? (S/N): ').upper()
+            if confirmacao == 'S':
+                FICHAS.pop(i)
+                salvar_fichas()
+                print(f'Ficha de {ficha["aluno"]} deletada com sucesso!.')
+            else:
+                print('Operação cancelada.')
+            aguardar_enter()
+            return
+    print(f'ERRO: Aluno "{busca}" não encontrado.')
+    aguardar_enter()
 
 def limpar(texto):
     """Limpa e exibe o título."""
@@ -107,6 +125,8 @@ def main():
         '1': cadastrar,
         '2': consultar,
         '3': listar,
+        '4': deletar,
+
     }
 
     while True:
@@ -114,12 +134,13 @@ def main():
         print('1. Cadastrar nova ficha')
         print('2. Consultar ficha por nome')
         print('3. Listar todos os treinos')
-        print('4. Sair\n')
+        print('4. Deletar ficha')
+        print('5. Sair\n')
         opcao = input('Escolha uma opção: ').strip()
 
         funcao_escolhida = opcoes.get(opcao)
 
-        if opcao == '4':
+        if opcao == '5':
             sair()
             break
         elif funcao_escolhida:
