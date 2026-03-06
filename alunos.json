@@ -1,0 +1,14 @@
+[
+    {
+        "aluno": "Fellype Dylon",
+        "objetivo": "Musculação",
+        "data_inicio": "05/03/2006",
+        "treino": [
+            {
+                "nome": "Exercicio",
+                "series": "10",
+                "repeticoes": "4"
+            }
+        ]
+    }
+]

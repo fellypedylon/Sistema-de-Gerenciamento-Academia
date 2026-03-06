@@ -1,6 +1,22 @@
 import os
+import json
+
 
 FICHAS = []
+ARQUIVO = "alunos.json"
+
+def salvar_fichas():
+    with open(ARQUIVO, "w", encoding="utf-8") as f:
+        json.dump(FICHAS, f, ensure_ascii=False, indent=4)
+    
+def carregar_fichas():
+    try:
+        with open(ARQUIVO, "r", encoding="utf-8") as f:
+            dados = json.load(f)
+            FICHAS.extend(dados)
+    except FileNotFoundError:
+        pass
+
 
 def limpar(texto):
     """Limpa e exibe o título."""
@@ -33,6 +49,7 @@ def cadastrar():
         
     FICHAS.append({'aluno': aluno, 'objetivo': objetivo, 'data_inicio': data_inicio, 'treino': treino})
     print(f'\nFicha de {aluno} cadastrada.')
+    salvar_fichas()
     aguardar_enter()
 
 def consultar():
@@ -112,4 +129,4 @@ def main():
             aguardar_enter()
 
 
-    main()
+main ()
